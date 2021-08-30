@@ -1,0 +1,21 @@
+FROM python:3.7-slim
+
+RUN apt update && apt install -y build-essential
+
+# Install Beam SDK
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel 
+RUN pip install --no-cache-dir apache-beam[gcp]==2.31.0
+
+# Copy files from official SDK image, including script/dependencies
+COPY --from=apache/beam_python3.7_sdk:2.31.0 /opt/apache/beam /opt/apache/beam
+
+# for nwrfcsdk
+RUN mkdir -p /opt/sap
+COPY nwrfcsdk/ "/opt/sap/nwrfcsdk"
+ENV SAPNWRFC_HOME="/opt/sap/nwrfcsdk"
+ENV LD_LIBRARY_PATH="/opt/sap/nwrfcsdk/lib"
+RUN pip install cython
+RUN pip install pyrfc==2.4.2
+
+# Set the entrypoint to Apache Beam SDK launcher.
+ENTRYPOINT ["/opt/apache/beam/boot"]

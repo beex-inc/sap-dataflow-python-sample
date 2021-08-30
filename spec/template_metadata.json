@@ -1,0 +1,95 @@
+{
+    "description": "CompanyCode Data transfer from SAP by SAPRFC.",
+    "name": "SAP CompanyCode Loader",
+        "parameters": [
+        {
+            "name": "base-bucket",
+            "label": "GCS Base Bucket Name",
+            "helpText": "GCS Base Bucket Name",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "job-name",
+            "label": "Job Name",
+            "helpText": "Job Name",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "job-project",
+            "label": "Job Project",
+            "helpText": "Job Project",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "sap-ashost",
+            "label": "SAP AS Host",
+            "helpText": "SAP AS Host",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "sap-user",
+            "label": "SAP User",
+            "helpText": "SAP User",
+            "regexes": [
+                "[A-z0-9_-]+"
+            ]
+        },
+        {
+            "name": "sap-passwd",
+            "label": "SAP User Password",
+            "helpText": "SAP User Password",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "sap-sysnr",
+            "label": "SAP System Number",
+            "helpText": "SAP System Number",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "sap-client",
+            "label": "SAP Client",
+            "helpText": "SAP Client",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "sap-lang",
+            "label": "SAP Lang",
+            "helpText": "SAP Lang",
+            "isOptional": true,
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "bq-dataset",
+            "label": "Destination BigQuery Dataset",
+            "helpText": "Destination BigQuery Dataset",
+            "regexes": [
+                ".*"
+            ]
+        },
+        {
+            "name": "bq-table",
+            "label": "Destination BigQuery Table",
+            "helpText": "Destination BigQuery Table",
+            "regexes": [
+                ".*"
+            ]
+        }
+    ]
+}
