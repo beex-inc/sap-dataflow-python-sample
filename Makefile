@@ -93,7 +93,7 @@ start-job: validate-vars-project validate-vars-bucket validate-vars-job
 		--disable-public-ips \
 		--parameters base-bucket="$(GCS_BUCKET_NAME)" \
 		--parameters job-project=$(PROJECT) \
-        --parameters job-name=$(JOB_NAME) \
+		--parameters job-name=$(JOB_NAME) \
 		--parameters sap-ashost=$(SAP_ASHOST) \
 		--parameters sap-user=$(SAP_USER) \
 		--parameters sap-passwd=$(SAP_PASSWD) \
