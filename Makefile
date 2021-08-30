@@ -84,15 +84,15 @@ build: validate-vars-project validate-vars-bucket build-flextemplate-image build
 .PHONY: start-job
 start-job: validate-vars-project validate-vars-bucket validate-vars-job 
 	gcloud dataflow flex-template run "$(JOB_NAME)-`date +%Y%m%d-%H%M%S`" \
-		--project=$(PROJECT) \
-		--region=$(REGION) \
-		--subnetwork=$(SUBNETWORK) \
+		--project=$(PROJECT) \ 
+		--region=$(REGION) \ 
+		--subnetwork=$(SUBNETWORK) \ 
 		--template-file-gcs-location="$(TEMPLATE_PATH)" \
-        --staging-location="gs://$(GCS_BUCKET_NAME)/dataflow/staging" \
+		--staging-location="gs://$(GCS_BUCKET_NAME)/dataflow/staging" \
 		--additional-experiments=use_runner_v2 \
 		--disable-public-ips \
-        --parameters base-bucket="$(GCS_BUCKET_NAME)" \
-        --parameters job-project=$(PROJECT) \
+		--parameters base-bucket="$(GCS_BUCKET_NAME)" \
+		--parameters job-project=$(PROJECT) \
         --parameters job-name=$(JOB_NAME) \
 		--parameters sap-ashost=$(SAP_ASHOST) \
 		--parameters sap-user=$(SAP_USER) \
