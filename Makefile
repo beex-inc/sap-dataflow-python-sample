@@ -16,7 +16,7 @@ METADATA_FILE := spec/template_metadata.json
 # Job Parameters
 SAP_USER := idadmin
 SAP_PASSWD := 
-SAP_ASHOST := 10.2.0.2
+SAP_ASHOST := 
 SAP_SYSNR := 00
 SAP_CLIENT := 800
 SAP_LANG := EN
@@ -37,6 +37,10 @@ ifndef GCS_BUCKET_NAME
 endif
 
 validate-vars-job:
+ifndef SAP_ASHOST
+	echo "Plead set SAP_ASHOST Variable"
+	exit 1
+endif
 ifndef SAP_PASSWD
 	echo "Plead set SAP_PASSWORD Variable (IDADMIN Password)"
 	exit 1
@@ -54,17 +58,18 @@ destroy-infra:
 	cd terraform/ && \
 	  terraform init && \
 	  terraform destroy
+	bq rm $(BQ_DATASET).$(BQ_TABLE)
 	bq rm $(BQ_DATASET)
 
 .PHONY: build-worker-image
-build-worker-image:
+build-worker-image: validate-vars-project 
 	docker build --tag $(WORKER_IMAGE) -f Dockerfile.worker .
 	gcloud auth configure-docker --project $(PROJECT)
 	docker push $(WORKER_IMAGE)
 
 .PHONY: build-flextemplate-image
-build-flextemplate-image:
-	docker build --tag $(FLEXTEMPLATE_IMAGE) -f Dockerfile .
+build-flextemplate-image: validate-vars-project 
+	docker build --tag $(FLEXTEMPLATE_IMAGE) -f Dockerfile.flextemplate .
 	gcloud auth configure-docker --project $(PROJECT)
 	docker push $(FLEXTEMPLATE_IMAGE)
 
