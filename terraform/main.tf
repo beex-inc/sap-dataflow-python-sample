@@ -91,13 +91,3 @@ resource "google_compute_router_nat" "nat_manual" {
 }
 
 
-###################################
-# BQ DATASET for BAPI_COMPANYCODE_GETLIST
-###################################
-resource "google_bigquery_dataset" "bq_dataset_sample" {
-  dataset_id    = "sap_dataset_sample"
-  friendly_name = "SAP Dataset Sample"
-  description   = "SAP Dataset Sample"
-  location      = var.gcp_region
-}
-

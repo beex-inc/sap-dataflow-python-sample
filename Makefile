@@ -44,6 +44,7 @@ endif
 
 .PHONY: setup-infra
 setup-infra:
+	bq mk $(BQ_DATASET)
 	cd terraform/ && \
 	  terraform init && \
 	  terraform apply
@@ -53,6 +54,7 @@ destroy-infra:
 	cd terraform/ && \
 	  terraform init && \
 	  terraform destroy
+	bq rm $(BQ_DATASET)
 
 .PHONY: build-worker-image
 build-worker-image:
